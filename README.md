@@ -1,27 +1,31 @@
-# ChartsAssignment
+# Log source graphs assignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.1.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Application overview
 
-## Code scaffolding
+It is angular application which first reads the data from CSV file and then displays the data in tabular and graphical format. Chart.js library is used for data visualization.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Prerequisites
 
-## Build
+### Install Node JS
+Refer to https://nodejs.org/en/ to install nodejs
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Downloading and Running the Application in local
 
-## Running unit tests
+Install all the npm packages. Go into the project folder and type the following command to install all npm packages
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+```
 
-## Running end-to-end tests
+In order to run the application Type the following command
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
 
-## Further help
+The Application Runs on **http://localhost:4200/**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The app will automatically reload if you change any of the source files.
