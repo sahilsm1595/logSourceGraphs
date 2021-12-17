@@ -1,0 +1,196 @@
+<div class="main-container">
+  <div class="chips-container">
+    <div class="count-row1">
+      <div class="count-card" style="border-top-color: black">
+        <span class="medium-title">TOTAL LOGS </span>
+        <div class="count-total">
+          <div class="count-tab-total">
+            <div class="logs-icon">
+              <canvas id="activeChart" width="160" height="140"></canvas>
+            </div>
+            <div class="count-tab">
+              <div class="count-display" style="color: royalblue">
+                {{ logsDetails.length }}
+              </div>
+              <div class="count-subtitle">number of logs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE Flip card -->
+      <div class="flip-card" style="border-top-color: green">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div style="padding-top: 12px" class="medium-title">
+              ACTIVE STATUS
+            </div>
+            <div style="padding: 20px 0px" class="count-figure">
+              <div class="count-tab">
+                <div class="count-display" style="color: green">
+                  {{ statusPercentage[0] }}%
+                </div>
+                <div class="count-subtitle">of Total logs</div>
+              </div>
+            </div>
+            <div class="animation-bar-1">
+              <span
+                [style.width.%]="statusPercentage[0]"
+                class="bar-active"
+                style="background-color: green"
+              ></span>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div style="padding-top: 12px" class="medium-title">
+              Name of Active logs
+            </div>
+            <div class="name-list">
+              <ng-container *ngFor="let item of logsDetails">
+                <div
+                  style="border: 1px solid green"
+                  class="name-chips"
+                  *ngIf="item.status == 'Active'"
+                >
+                  {{ item.name }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- InActive flipcard -->
+      <div class="flip-card" style="border-top-color: red">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div style="padding-top: 12px" class="medium-title">
+              INACTIVE STATUS
+            </div>
+            <div style="padding: 20px 0px" class="count-figure">
+              <div class="count-tab">
+                <div class="count-display" style="color: red">
+                  {{ statusPercentage[1] }}%
+                </div>
+                <div class="count-subtitle">of Total logs</div>
+              </div>
+            </div>
+            <div class="animation-bar-1">
+              <span
+                [style.width.%]="statusPercentage[1]"
+                class="bar-active"
+                style="background-color: red"
+              ></span>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div style="padding-top: 12px" class="medium-title">
+              Name of Inactive logs
+            </div>
+            <div class="name-list">
+              <ng-container *ngFor="let item of logsDetails">
+                <div
+                  style="border: 1px solid red"
+                  class="name-chips"
+                  *ngIf="item.status == 'Inactive'"
+                >
+                  {{ item.name }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standby flipcard -->
+      <div class="flip-card" style="border-top-color: #f9d70a">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div style="padding-top: 12px" class="medium-title">
+              STANDBY STATUS
+            </div>
+            <div style="padding: 20px 0px" class="count-figure">
+              <div class="count-tab">
+                <div class="count-display" style="color: #f9d70a">
+                  {{ statusPercentage[2] }}%
+                </div>
+                <div class="count-subtitle">of Total logs</div>
+              </div>
+            </div>
+            <div class="animation-bar-1">
+              <span
+                [style.width.%]="statusPercentage[2]"
+                class="bar-active"
+                style="background-color: #f9d70a"
+              ></span>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <div style="padding-top: 12px" class="medium-title">
+              Name of Standby logs
+            </div>
+            <div class="name-list">
+              <ng-container *ngFor="let item of logsDetails">
+                <div
+                  style="border: 1px solid #f9d70a"
+                  class="name-chips"
+                  *ngIf="item.status == 'Standby'"
+                >
+                  {{ item.name }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-container">
+    <div class="chart-container">
+      <div style="padding: 8px 8px" class="medium-title">
+        Status by percentage
+      </div>
+      <canvas id="myChart" width="100" height="100"></canvas>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 10%">Name</th>
+            <th>Last event</th>
+            <th>Creation date</th>
+            <th>State</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of logsDetails">
+            <td style="width: 10%; text-align: center">{{ item.name }}</td>
+            <td>{{ item.lastEvent }}</td>
+            <td>{{ item.creationDate }}</td>
+            <!-- <td>{{ item.status }}</td> -->
+            <td>
+              <select [(ngModel)]="item.status">
+                <option *ngFor="let mission of statusArr">
+                  {{ mission }}
+                </option>
+              </select>
+            </td>
+            <td style="padding-left: 34px">
+              <div
+                [ngClass]="{
+                  active: item.status == 'Active',
+                  inactive: item.status == 'Inactive',
+                  standby: item.status == 'Standby'
+                }"
+              >
+                <!-- {{ item.status }} -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
