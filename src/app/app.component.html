@@ -18,7 +18,6 @@
         </div>
       </div>
 
-      <!-- ACTIVE Flip card -->
       <div class="flip-card" style="border-top-color: green">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -60,7 +59,6 @@
         </div>
       </div>
 
-      <!-- InActive flipcard -->
       <div class="flip-card" style="border-top-color: red">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -102,7 +100,6 @@
         </div>
       </div>
 
-      <!-- Standby flipcard -->
       <div class="flip-card" style="border-top-color: #f9d70a">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -147,21 +144,17 @@
   </div>
 
   <div class="data-container">
-    <div class="chart-container">
-      <div style="padding: 8px 8px" class="medium-title">
-        Status by percentage
-      </div>
-      <canvas id="myChart" width="100" height="100"></canvas>
-    </div>
     <div class="table-container">
-      <table>
+      <table class="styled-table">
         <thead>
           <tr>
-            <th style="width: 10%">Name</th>
-            <th>Last event</th>
-            <th>Creation date</th>
+            <ng-container *ngFor="let item of tempArr">
+              <th>{{ item }}</th>
+            </ng-container>
+            <!-- <th *ngFor="let itemHeader of tempArr" style="width: 10%"></th> -->
+            <!-- <th>Creation date</th>
             <th>State</th>
-            <th>Status</th>
+            <th>Status</th> -->
           </tr>
         </thead>
         <tbody>
@@ -170,19 +163,19 @@
             <td>{{ item.lastEvent }}</td>
             <td>{{ item.creationDate }}</td>
             <!-- <td>{{ item.status }}</td> -->
-            <td>
+            <td style="position: relative">
               <select [(ngModel)]="item.status">
                 <option *ngFor="let mission of statusArr">
                   {{ mission }}
                 </option>
               </select>
             </td>
-            <td style="padding-left: 34px">
+            <td style="padding-left: 34px" *ngFor="let ele of item.timeline">
               <div
                 [ngClass]="{
-                  active: item.status == 'Active',
-                  inactive: item.status == 'Inactive',
-                  standby: item.status == 'Standby'
+                  active: ele == 'Active',
+                  inactive: ele == 'Inactive',
+                  standby: ele == 'Standby'
                 }"
               >
                 <!-- {{ item.status }} -->
@@ -191,6 +184,18 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="chartMain">
+    <div class="chart-container">
+      <!-- <div style="padding: 2px 8px" class="medium-title">
+        Status by percentage
+      </div> -->
+      <span style="padding: 4px 6px; font-weight: bold"
+        >Status by percentage</span
+      >
+      <canvas id="myChart" width="100" height="100"></canvas>
     </div>
   </div>
 </div>

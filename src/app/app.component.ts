@@ -11,6 +11,9 @@ export class AppComponent {
   title = 'chartsAssignment';
 
   public logsDetails: any = [];
+  public allLogsDetails: any = [];
+  public allLogsHeader: any = [];
+
   public statusArr: any = [];
   public countStatus: any = [];
   public chart: any = null;
@@ -18,16 +21,29 @@ export class AppComponent {
   public optionsDonut: any;
   public percentArr: any = [];
   public statusPercentage: any = [];
+  public tempArr: any = [];
 
   constructor(private http: HttpClient) {
     this.logsDetails = [];
+    this.allLogsDetails = [];
+    this.allLogsHeader = [];
     this.http
-      .get('../assets/data/Test.csv', { responseType: 'text' })
+      .get('../assets/data/UpdatedTest.csv', { responseType: 'text' })
       .subscribe(
         (data: string) => {
-          const csvToRowArray = data.split('\n');
+          let csvToRowArray = data.split('\n');
+
+          csvToRowArray = csvToRowArray.map((item) => {
+            return item.replace(/(\r\n|\n|\r)/gm, '');
+          });
+
+          this.allLogsHeader.push(...csvToRowArray[0].split(','));
+          // console.log([...this.allLogsHeader]);
+          this.tempArr = [...this.allLogsHeader];
           for (let index = 1; index < csvToRowArray.length - 1; index++) {
-            const row = csvToRowArray[index].split(',');
+            const rowO = csvToRowArray[index].split(',');
+            let row = [...rowO];
+
             let dateStr1 = row[1] + row[2];
             let dateStr2 = row[3] + row[4];
             this.logsDetails.push({
@@ -35,7 +51,10 @@ export class AppComponent {
               lastEvent: dateStr1.replace(/(^"|"$)/g, ''),
               creationDate: dateStr2.replace(/(^"|"$)/g, ''),
               status: row[5],
+              timeline: row.slice(-7),
             });
+
+            this.allLogsDetails.push(row[0], dateStr1, dateStr2, row[5]);
 
             this.percentArr.push(row[5]);
           }
