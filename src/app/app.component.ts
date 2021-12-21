@@ -22,7 +22,7 @@ export class AppComponent {
   public optionsDonut: any;
   public percentArr: any = [];
   public statusPercentage: any = [];
-  public tempArr: any = [];
+  public headerLogs: any = [];
 
   constructor(private http: HttpClient) {
     this.logsDetails = [];
@@ -40,7 +40,7 @@ export class AppComponent {
 
           this.allLogsHeader.push(...csvToRowArray[0].split(','));
           // console.log([...this.allLogsHeader]);
-          this.tempArr = [...this.allLogsHeader];
+          this.headerLogs = [...this.allLogsHeader];
           for (let index = 1; index < csvToRowArray.length - 1; index++) {
             const rowO = csvToRowArray[index].split(',');
             let row = [...rowO];
