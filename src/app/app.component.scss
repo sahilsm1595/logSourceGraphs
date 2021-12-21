@@ -1,17 +1,15 @@
-$bgColor: #eae8e8;
-// $bgColor: linear-gradient(45deg, #49a09d, #5f2c82);
+// $bgColor: #eae8e8;
+$bgColor: linear-gradient(45deg, #49a09d, #5f2c82);
 
 .main-container {
   height: 100%;
   width: 100%;
   // background-color: $bgColor;
-  // font-family: "Open Sans", sans-serif !important;
+  font-family: "Open Sans", sans-serif !important;
 
   margin: 0;
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
-  font-family: sans-serif;
+  background: $bgColor;
   font-weight: 100;
-  // padding: 8px 0px;
 
   .chips-container {
     margin-bottom: 12px;
