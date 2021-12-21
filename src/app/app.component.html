@@ -158,7 +158,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of logsDetails">
+          <tr
+            *ngFor="
+              let item of logsDetails
+                | paginate: { itemsPerPage: 10, currentPage: p }
+            "
+          >
             <td>{{ item.name }}</td>
             <td>{{ item.lastEvent }}</td>
             <td>{{ item.creationDate }}</td>
@@ -185,6 +190,7 @@
         </tbody>
       </table>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 
   <div class="chartMain">

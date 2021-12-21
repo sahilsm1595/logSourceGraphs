@@ -9,6 +9,7 @@ import { Chart, registerables } from 'chart.js';
 })
 export class AppComponent {
   title = 'chartsAssignment';
+  p: number = 1;
 
   public logsDetails: any = [];
   public allLogsDetails: any = [];
@@ -28,7 +29,7 @@ export class AppComponent {
     this.allLogsDetails = [];
     this.allLogsHeader = [];
     this.http
-      .get('../assets/data/UpdatedTest.csv', { responseType: 'text' })
+      .get('../assets/data/DummyData.csv', { responseType: 'text' })
       .subscribe(
         (data: string) => {
           let csvToRowArray = data.split('\n');

@@ -113,7 +113,9 @@ $bgColor: linear-gradient(45deg, #49a09d, #5f2c82);
   }
 
   .table-container {
-    height: 480px;
+    // height: 480px;
+    max-height: 426px;
+    height: auto;
     width: 100%;
     overflow-y: auto;
     box-shadow: 1px 1px 15px 1px rgb(108 106 106 / 84%);
